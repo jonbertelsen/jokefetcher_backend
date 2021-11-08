@@ -4,6 +4,7 @@ import webscraper.TagCounter;
 import webscraper.TagDTO;
 import webscraper.Tester;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,6 +30,7 @@ public class WebScraperResource
     @Path("sequental")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
     public String getTagsSequental() {
         long startTime = System.nanoTime();
         LocalTime begin = LocalTime.now();
@@ -42,6 +44,7 @@ public class WebScraperResource
     @Path("parallel")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
     public String getTagsParrallel() throws ExecutionException, InterruptedException
     {
         LocalTime begin = LocalTime.now();

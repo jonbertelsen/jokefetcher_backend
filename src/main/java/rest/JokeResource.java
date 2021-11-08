@@ -6,7 +6,9 @@ import dtos.CombinedDTO;
 import dtos.DadDTO;
 import utils.HttpUtils;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
@@ -27,11 +29,17 @@ import java.util.concurrent.ExecutionException;
 @Path("jokes")
 public class JokeResource {
 
+    @Context
+    private UriInfo context;
+
+    @Context
+    SecurityContext securityContext;
+
     Gson gson = new Gson();
 
-   
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("user")
     public String getJokes() throws IOException, ExecutionException, InterruptedException
     {
         LocalTime start = LocalTime.now();
